@@ -1020,10 +1020,18 @@ const API_BASE = 'https://api.little6llc.com:3001';
 const MEMORIAL_ID = 'camille-borgia';
 
 // ── CANDLE SYSTEM ────────────────────────────────────────────────────
-let candles = JSON.parse(localStorage.getItem('camille_candles') || '[]');
+let candles = [];
 
-function saveCandlesLocal() {
-  localStorage.setItem('camille_candles', JSON.stringify(candles));
+async function loadCandles() {
+  try {
+    const res = await fetch(`${API_BASE}/memorial/${MEMORIAL_ID}/candles`);
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    candles = data.candles || [];
+  } catch {
+    candles = [];
+  }
+  renderCandles();
 }
 
 function renderCandles() {
@@ -1081,22 +1089,21 @@ document.getElementById('candleName').addEventListener('keydown', function(e) {
   if (e.key === 'Enter') lightCandle();
 });
 
-function lightCandle() {
+async function lightCandle() {
   const name = document.getElementById('candleName').value.trim();
   if (!name) { document.getElementById('candleName').focus(); return; }
 
-  candles.unshift({ name, lit: new Date().toISOString() });
-  if (candles.length > 50) candles = candles.slice(0, 50);
-  saveCandlesLocal();
-  renderCandles();
   closeCandleModal();
 
-  // Also try to save to server (non-blocking)
-  fetch(`${API_BASE}/memorial/${MEMORIAL_ID}/candles`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ name })
-  }).catch(() => {});
+  // Save to server then reload so everyone sees it
+  try {
+    await fetch(`${API_BASE}/memorial/${MEMORIAL_ID}/candles`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name })
+    });
+  } catch {}
+  loadCandles();
 }
 
 // ── GUESTBOOK ────────────────────────────────────────────────────────
@@ -1221,7 +1228,7 @@ function resetTimer() {
 resetTimer();
 
 
-renderCandles();
+loadCandles();
 loadEntries();
 </script>
 </body>
