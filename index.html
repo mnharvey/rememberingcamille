@@ -710,7 +710,79 @@
   }
   nav a:hover { color: var(--gold-dark); }
 
-  /* ── RESPONSIVE ── */
+  /* ── SLIDESHOW ── */
+  .slideshow-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    margin: 32px auto 0;
+    border: 1px solid var(--gold-light);
+    background: var(--charcoal);
+    overflow: hidden;
+  }
+
+  .slideshow-track { position: relative; width: 100%; }
+
+  .slide {
+    display: none;
+    width: 100%;
+    aspect-ratio: 4/3;
+    overflow: hidden;
+  }
+
+  .slide.active { display: block; }
+
+  .slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.5s ease;
+  }
+
+  .slide-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(250,246,240,0.85);
+    border: 1px solid var(--gold-light);
+    color: var(--charcoal);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.2s ease;
+  }
+
+  .slide-btn:hover { background: var(--gold-light); }
+  .slide-prev { left: 12px; }
+  .slide-next { right: 12px; }
+
+  .slide-dots {
+    position: absolute;
+    bottom: 14px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 10;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+    border: 1px solid rgba(255,255,255,0.6);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .dot.active { background: var(--gold); border-color: var(--gold); }
+
+
   @media (max-width: 600px) {
     .details-bar { padding: 24px; gap: 24px; }
     .guestbook-form { padding: 24px; }
@@ -736,7 +808,7 @@
   </div>
 
   <h1 class="hero-name">Camille Noe Borgia</h1>
-  <div class="hero-dates">February 2, 1992 &nbsp;·&nbsp; May 15, 2025</div>
+  <div class="hero-dates">February 2, 1993 &nbsp;·&nbsp; May 15, 2026</div>
 
   <div class="hero-divider">
     <span></span>
@@ -760,7 +832,7 @@
   <h2 class="section-title">A Life Beautifully Lived</h2>
 
   <div class="tribute-text">
-    <p>Camille Noe Borgia entered this world on February 2, 1992, and for 33 years she filled it with warmth, laughter, and a love that was impossible to contain. She was a wife, a mother to precious Luca, a daughter, a friend, and a light to everyone fortunate enough to know her.</p>
+    <p>Camille Noe Borgia entered this world on February 2, 1993, and for 33 years she filled it with warmth, laughter, and a love that was impossible to contain. She was a wife, a mother to precious Luca, a daughter, a friend, and a light to everyone fortunate enough to know her.</p>
 
     <p>Those who knew Camille speak of the same things: her spirit, her smile, her generous love for all. Whether it was through her time as a missionary — visiting homes and leaving pieces of her heart in every one — or spinning on the dance floor during country swing nights, or simply being present with the people she loved, Camille gave freely and completely.</p>
 
@@ -777,19 +849,27 @@
   <div class="details-bar">
     <div class="detail-item">
       <div class="label">Born</div>
-      <div class="value">February 2, 1992</div>
+      <div class="value">February 2, 1993</div>
     </div>
     <div class="detail-item">
       <div class="label">Passed</div>
-      <div class="value">May 15, 2025</div>
+      <div class="value">May 15, 2026</div>
     </div>
     <div class="detail-item">
       <div class="label">Age</div>
       <div class="value">33 years</div>
     </div>
     <div class="detail-item">
+      <div class="label">Viewing</div>
+      <div class="value">May 23, 2026 · 9am</div>
+    </div>
+    <div class="detail-item">
       <div class="label">Funeral Service</div>
-      <div class="value">Saturday, May 23</div>
+      <div class="value">May 23, 2026 · 10am</div>
+    </div>
+    <div class="detail-item">
+      <div class="label">Location</div>
+      <div class="value">1050 S Hobson St<br>Mesa, AZ 85204</div>
     </div>
     <div class="detail-item">
       <div class="label">Survived By</div>
@@ -803,34 +883,65 @@
   <div class="gallery-inner">
     <div class="section-label">Memories</div>
     <h2 class="section-title">Photo Gallery</h2>
-    <p class="gallery-add-note">Friends and family are invited to add photos to this shared album — every memory is welcome.</p>
 
-    <div style="margin-top: 32px; text-align: center;">
+    <!-- SLIDESHOW -->
+    <div class="slideshow-wrapper">
+      <div class="slideshow-track" id="slideshowTrack">
+        <div class="slide active">
+          <img src="https://raw.githubusercontent.com/mnharvey/rememberingcamille/main/photos/IMG_7017.jpeg" alt="Camille">
+        </div>
+        <div class="slide">
+          <img src="https://raw.githubusercontent.com/mnharvey/rememberingcamille/main/photos/IMG_7019.jpeg" alt="Camille">
+        </div>
+        <div class="slide">
+          <img src="https://raw.githubusercontent.com/mnharvey/rememberingcamille/main/photos/IMG_7021.jpeg" alt="Camille">
+        </div>
+        <div class="slide">
+          <img src="https://raw.githubusercontent.com/mnharvey/rememberingcamille/main/photos/IMG_7022.jpeg" alt="Camille">
+        </div>
+        <div class="slide">
+          <img src="https://raw.githubusercontent.com/mnharvey/rememberingcamille/main/photos/IMG_8634.jpeg" alt="Camille">
+        </div>
+      </div>
+
+      <!-- Prev / Next arrows -->
+      <button class="slide-btn slide-prev" onclick="moveSlide(-1)" aria-label="Previous">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="slide-btn slide-next" onclick="moveSlide(1)" aria-label="Next">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+
+      <!-- Dots -->
+      <div class="slide-dots" id="slideDots"></div>
+    </div>
+
+    <!-- Add photos button -->
+    <div style="text-align: center; margin-top: 32px;">
       <a href="https://photos.app.goo.gl/zVxYqeNC2YwGiCYr5" target="_blank" style="
         display: inline-flex;
         align-items: center;
-        gap: 12px;
-        background: linear-gradient(135deg, #f0e6d4, #ede0cc);
+        gap: 10px;
+        background: transparent;
         border: 1px solid var(--gold-light);
-        padding: 20px 36px;
+        padding: 14px 32px;
         text-decoration: none;
-        color: var(--charcoal);
+        color: var(--gold-dark);
         font-family: 'Jost', sans-serif;
-        font-size: 0.8rem;
-        letter-spacing: 0.25em;
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
         text-transform: uppercase;
         transition: all 0.3s ease;
-        margin-bottom: 16px;
-      " onmouseover="this.style.background='linear-gradient(135deg,#e8dace,#e0d4bc)'" onmouseout="this.style.background='linear-gradient(135deg,#f0e6d4,#ede0cc)'">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--gold-dark)" stroke-width="1.5">
-          <rect x="3" y="3" width="18" height="18" rx="2"/>
-          <circle cx="8.5" cy="8.5" r="1.5"/>
-          <polyline points="21 15 16 10 5 21"/>
+      " onmouseover="this.style.background='rgba(201,168,76,0.08)'" onmouseout="this.style.background='transparent'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
         </svg>
-        View &amp; Add Photos
+        Add Your Photos &amp; Videos
       </a>
-      <p style="font-size: 0.75rem; color: var(--warm-gray); margin-top: 12px; font-style: italic;">
-        Opens Google Photos — you can view all photos and add your own memories
+      <p style="font-size: 0.72rem; color: var(--warm-gray); margin-top: 10px; font-style: italic;">
+        Share your memories — opens Google Photos
       </p>
     </div>
   </div>
@@ -884,7 +995,7 @@
 <!-- ── FOOTER ── -->
 <footer>
   <div class="footer-name">Camille Noe Borgia</div>
-  <div class="footer-dates">February 2, 1992 &nbsp;·&nbsp; May 15, 2025</div>
+  <div class="footer-dates">February 2, 1993 &nbsp;·&nbsp; May 15, 2026</div>
   <div class="footer-divider"></div>
   <p>Follow the family on <a href="https://www.facebook.com/profile.php?id=61578515159934" target="_blank">Facebook</a></p>
   <p style="margin-top: 12px; font-size: 0.65rem; opacity: 0.5;">Memorial site created with love</p>
@@ -1077,7 +1188,39 @@ function formatDate(iso) {
   } catch { return ''; }
 }
 
-// ── INIT ─────────────────────────────────────────────────────────────
+// ── SLIDESHOW ────────────────────────────────────────────────────────
+let currentSlide = 0;
+const slides = document.querySelectorAll('.slide');
+const dotsContainer = document.getElementById('slideDots');
+let slideTimer;
+
+// Build dots
+slides.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'dot' + (i === 0 ? ' active' : '');
+  dot.onclick = () => goToSlide(i);
+  dotsContainer.appendChild(dot);
+});
+
+function goToSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  dotsContainer.children[currentSlide].classList.remove('active');
+  currentSlide = (n + slides.length) % slides.length;
+  slides[currentSlide].classList.add('active');
+  dotsContainer.children[currentSlide].classList.add('active');
+  resetTimer();
+}
+
+function moveSlide(dir) { goToSlide(currentSlide + dir); }
+
+function resetTimer() {
+  clearInterval(slideTimer);
+  slideTimer = setInterval(() => moveSlide(1), 5000);
+}
+
+resetTimer();
+
+
 renderCandles();
 loadEntries();
 </script>
