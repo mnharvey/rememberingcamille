@@ -953,79 +953,6 @@
     </div>
 
 
-    <!-- VIDEO -->
-    <div style="max-width: 680px; margin: 40px auto 0;">
-      <div class="section-label" style="margin-bottom: 16px;">A Moment in Time</div>
-
-      <div id="videoThumb" onclick="expandVideo()" style="
-        position: relative;
-        width: 100%;
-        aspect-ratio: 16/9;
-        background: #1e1a16;
-        border: 1px solid var(--gold-light);
-        cursor: pointer;
-        overflow: hidden;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      ">
-        <!-- Dark overlay -->
-        <div style="
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(135deg, rgba(30,26,22,0.7), rgba(58,53,48,0.5));
-          z-index: 1;
-        "></div>
-
-        <!-- Play button -->
-        <div style="
-          position: relative;
-          z-index: 2;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          gap: 14px;
-          transition: transform 0.2s ease;
-        " id="playBtn">
-          <div style="
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            border: 2px solid var(--gold);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(201,168,76,0.15);
-            backdrop-filter: blur(4px);
-          ">
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="var(--gold)">
-              <polygon points="5,3 19,12 5,21"/>
-            </svg>
-          </div>
-          <span style="
-            font-size: 0.65rem;
-            letter-spacing: 0.35em;
-            text-transform: uppercase;
-            color: var(--gold-light);
-            font-family: 'Jost', sans-serif;
-          ">Play Video</span>
-        </div>
-      </div>
-
-      <!-- Actual video (hidden until clicked) -->
-      <div id="videoPlayer" style="display: none; margin-top: 0;">
-        <video controls autoplay style="
-          width: 100%;
-          border: 1px solid var(--gold-light);
-          background: #000;
-          display: block;
-        ">
-          <source src="https://raw.githubusercontent.com/mnharvey/rememberingcamille/main/photos/IMG_0535.MP4" type="video/mp4">
-          Your browser does not support this video.
-        </video>
-      </div>
-    </div>
-
     <!-- Add photos button -->
     <div style="text-align: center; margin-top: 32px;">
       <a href="https://photos.app.goo.gl/zVxYqeNC2YwGiCYr5" target="_blank" style="
@@ -1303,12 +1230,6 @@ function formatDate(iso) {
   try {
     return new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
   } catch { return ''; }
-}
-
-// ── VIDEO ────────────────────────────────────────────────────────────
-function expandVideo() {
-  document.getElementById('videoThumb').style.display = 'none';
-  document.getElementById('videoPlayer').style.display = 'block';
 }
 
 // ── SLIDESHOW ────────────────────────────────────────────────────────
